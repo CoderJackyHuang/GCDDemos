@@ -24,43 +24,43 @@
 - (void)demo1 {
   
   //    [self demo1_global_queue];
-//  [self demo1_serial_queue];
-//  [self  demo1_concurrency_queue];
+  //  [self demo1_serial_queue];
+  //  [self  demo1_concurrency_queue];
   //  [self demo1_main_queue];
   [self demo1_global_queue_prority];
 }
 
 - (void)demo1_concurrency_queue {
-dispatch_queue_t serialQueue = dispatch_queue_create("com.huangyibiao.serial-queue",
-                                                     DISPATCH_QUEUE_CONCURRENT);
-dispatch_async(serialQueue, ^{
-  NSLog(@"s1");
-});
-dispatch_async(serialQueue, ^{
-  sleep(2);
-  NSLog(@"s2");
-});
-dispatch_async(serialQueue, ^{
-  sleep(1);
-  NSLog(@"s3");
-});
+  dispatch_queue_t serialQueue = dispatch_queue_create("com.huangyibiao.serial-queue",
+                                                       DISPATCH_QUEUE_CONCURRENT);
+  dispatch_async(serialQueue, ^{
+    NSLog(@"s1");
+  });
+  dispatch_async(serialQueue, ^{
+    sleep(2);
+    NSLog(@"s2");
+  });
+  dispatch_async(serialQueue, ^{
+    sleep(1);
+    NSLog(@"s3");
+  });
 }
 
 - (void)demo1_serial_queue {
-// 串行队列
-dispatch_queue_t concurrencyQueue = dispatch_queue_create("com.huangyibiao.concurrency-queue",
-                                                          DISPATCH_QUEUE_SERIAL);
-dispatch_async(concurrencyQueue, ^{
-  NSLog(@"s1");
-});
-dispatch_async(concurrencyQueue, ^{
-  sleep(2);
-  NSLog(@"s2");
-});
-dispatch_async(concurrencyQueue, ^{
-  sleep(1);
-  NSLog(@"s3");
-});
+  // 串行队列
+  dispatch_queue_t concurrencyQueue = dispatch_queue_create("com.huangyibiao.concurrency-queue",
+                                                            DISPATCH_QUEUE_SERIAL);
+  dispatch_async(concurrencyQueue, ^{
+    NSLog(@"s1");
+  });
+  dispatch_async(concurrencyQueue, ^{
+    sleep(2);
+    NSLog(@"s2");
+  });
+  dispatch_async(concurrencyQueue, ^{
+    sleep(1);
+    NSLog(@"s3");
+  });
 }
 
 - (void)demo1_main_queue {
@@ -103,21 +103,21 @@ dispatch_async(concurrencyQueue, ^{
 }
 
 - (void)demo1_global_queue_prority {
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-  NSLog(@"4");
-});
-
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-  NSLog(@"3");
-});
-
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-  NSLog(@"2");
-});
-
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-  NSLog(@"1");
-});
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    NSLog(@"4");
+  });
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    NSLog(@"3");
+  });
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSLog(@"2");
+  });
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+    NSLog(@"1");
+  });
 }
 
 @end
